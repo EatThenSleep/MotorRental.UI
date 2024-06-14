@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Core/Component/header/header.component';
 import { FooterComponent } from './Core/Component/footer/footer.component';
 import { DashboardsComponent } from './Core/Component/dashboards/dashboards.component';
-import { MotobikeListComponent } from './Feature/Motobike/motobike-list/motobike-list.component';
-
+import { MotorbikeListComponent } from './Feature/Motobike/motobike-list/motorbike-list.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +14,10 @@ import { MotobikeListComponent } from './Feature/Motobike/motobike-list/motobike
     HeaderComponent,
     FooterComponent,
     DashboardsComponent,
-    MotobikeListComponent
+    MotorbikeListComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
-  
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
