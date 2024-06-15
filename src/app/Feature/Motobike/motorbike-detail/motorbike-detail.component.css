@@ -1,0 +1,22 @@
+.large-badge {
+  font-size: 0.8rem;
+  padding: 0.5em 1em;
+}
+.badge-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+  color: white;
+}
+
+
+  
+

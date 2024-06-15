@@ -7,6 +7,9 @@ import { HeaderComponent } from './Core/Component/header/header.component';
 import { FooterComponent } from './Core/Component/footer/footer.component';
 import { DashboardsComponent } from './Core/Component/dashboards/dashboards.component';
 import { MotorbikeListComponent } from './Feature/Motobike/motobike-list/motorbike-list.component';
+import { FormsModule } from '@angular/forms';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/motorbike-detail.component'; 
 
 @NgModule({
   declarations: [
@@ -15,8 +18,10 @@ import { MotorbikeListComponent } from './Feature/Motobike/motobike-list/motorbi
     FooterComponent,
     DashboardsComponent,
     MotorbikeListComponent,
+    BreadcrumbComponent,
+    MotorbikeDetailComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule,  FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
