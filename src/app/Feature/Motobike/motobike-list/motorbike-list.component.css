@@ -1,0 +1,23 @@
+.zoomable-image {
+  transition: transform 0.2s ease-in-out;
+}
+
+.zoomable-image:hover {
+  transform: scale(5);
+  z-index: 10;
+  position: relative;
+}
+.badge-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+  color: white;
+}
