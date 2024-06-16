@@ -29,29 +29,15 @@ export class MotorbikeDetailComponent implements OnInit {
     }
   }
 
-  getMotorbikeType(type: number): string {
-    switch (type) {
-      case 1:
-        return 'Xe số';
-      case 2:
-        return 'Xe tay ga';
-      case 3:
-        return 'Xe côn';
-      default:
-        return 'Unknown';
-    }
+  getMotorbikeType(type: number) {
+    if (type === 1) return 'Xe số';
+    else if (type === 2) return 'Xe tay ga';
+    return 'Xe tay côn';
   }
 
-  getMotorbikeStatus(status: number): string {
-    switch (status) {
-      case 1:
-        return 'Enable';
-      case 2:
-        return 'Busy';
-      case 3:
-        return 'Maintain';
-      default:
-        return 'Unknown';
-    }
+  getMotorbikeStatus(status: number) {
+    if (status === 1) return 'Enable';
+    else if (status === 2) return 'Busy';
+    return 'Maintain';
   }
 }

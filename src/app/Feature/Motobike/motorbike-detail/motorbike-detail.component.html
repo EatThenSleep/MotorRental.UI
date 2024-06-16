@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-5">
       <div class="text-center mb-4">
-        <img [src]="motorbike.motorbikeAvatar" class="img-fluid rounded" />
+        <img [src]="motorbike.motorbikeAvatar" class="img-fluid rounded" style="width: 350px; height: 350px;"/>
       </div>
     </div>
     <div class="col-lg-6 ml-4">
@@ -56,9 +56,9 @@
         <p>{{ motorbike.description || "No description available." }}</p>
       </div>
       <div class="row">
-        <div class="col-md-6 mb-2">
+        <div class="col-md-6 mb-2 ">
           <div class="d-flex">
-            <h6 class="font-14 mb-0">Type:</h6>
+            <h6 class="font-14 mb-0 mr-n1">Type:</h6>
             <p class="text-sm lh-150 ml-2 mt-1">
               {{ getMotorbikeType(motorbike.type) }}
             </p>
@@ -66,31 +66,31 @@
         </div>
         <div class="col-md-6 mb-2">
           <div class="d-flex">
-            <h6 class="font-14 mb-0">Speed:</h6>
+            <h6 class="font-14 mb-0 mr-n1">Speed:</h6>
             <p class="text-sm lh-150 ml-2 mt-1">{{ motorbike.speed }} km/h</p>
           </div>
         </div>
-        <div class="col-md-6 mb-2">
+        <div class="col-md-6 mb-2 mt-n1">
           <div class="d-flex">
-            <h6 class="font-14 mb-0">Capacity:</h6>
+            <h6 class="font-14 mb-0 mr-n1">Capacity:</h6>
             <p class="text-sm lh-150 ml-2 mt-1">{{ motorbike.capacity }} cc</p>
           </div>
         </div>
-        <div class="col-md-6 mb-2">
+        <div class="col-md-6 mb-2 mt-n1">
           <div class="d-flex">
-            <h6 class="font-14 mb-0">Color:</h6>
+            <h6 class="font-14 mb-0 mr-n1">Color:</h6>
             <p class="text-sm lh-150 ml-2 mt-1">{{ motorbike.color }}</p>
           </div>
         </div>
-        <div class="col-md-6 mb-2">
+        <div class="col-md-6 mb-2 mt-n1">
           <div class="d-flex">
-            <h6 class="font-14 mb-0">Made In:</h6>
+            <h6 class="font-14 mb-0 mr-n1">Made In:</h6>
             <p class="text-sm lh-150 ml-2 mt-1">{{ motorbike.madeIn }}</p>
           </div>
         </div>
-        <div class="col-md-6 mb-2">
+        <div class="col-md-6 mb-2 mt-n1">
           <div class="d-flex">
-            <h6 class="font-14 mb-0">License Plate:</h6>
+            <h6 class="font-14 mb-0 mr-n1">License Plate:</h6>
             <p class="text-sm lh-150 ml-2 mt-1">{{ motorbike.licensePlate }}</p>
           </div>
         </div>
@@ -98,6 +98,6 @@
     </div>
   </div>
 </div>
-<div *ngIf="!motorbike" class="text-center mt-4">
-  <p>Loading motorbike details...</p>
+<div *ngIf="!motorbike" class="d-flex justify-content-center mt-4">
+  <div class="progress-circular"></div>
 </div>
