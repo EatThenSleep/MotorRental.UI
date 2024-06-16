@@ -7,17 +7,40 @@
   z-index: 10;
   position: relative;
 }
-.badge-primary {
-  background-color: #007bff;
-  color: white;
+
+.progress-circular {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #1976d2; 
+  animation: spin 1s linear infinite;
 }
 
-.badge-danger {
-  background-color: #dc3545;
-  color: white;
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
 
-.badge-warning {
-  background-color: #ffc107;
-  color: white;
+button:disabled,
+button.disabled-btn {
+  background-color: gray;
+  border-color: gray
+}
+
+.sort-icon {
+  cursor: pointer;
+  margin-left: 5px;
+}
+.sort-asc::after {
+  content: '▲';
+  margin-left: 5px;
+}
+.sort-desc::after {
+  content: '▼';
+  margin-left: 5px;
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MotorbikeService } from '../services/motorbike.service';
 import { Motorbike } from '../models/motorbike.model';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { ExportService } from '../services/export.service';
 
 @Component({
   selector: 'app-motorbike-list',
@@ -18,16 +17,16 @@ export class MotorbikeListComponent implements OnInit {
   itemsPerPage: number = 3;
   totalPages: number = 0;
   zoomedImageId: string | null = null;
+  sortedColumn: string = 'name'; 
+  sortDescending: boolean = false; 
 
-  private searchSubject = new Subject<string>();
-
-  constructor(private motorbikeService: MotorbikeService) {}
+  constructor(
+    private motorbikeService: MotorbikeService,
+    private exportService: ExportService
+  ) {}
 
   ngOnInit(): void {
     this.getAllMotorbikes();
-    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
-      this.searchAndFilterMotorbikes();
-    });
   }
 
   getAllMotorbikes(): void {
@@ -38,13 +37,20 @@ export class MotorbikeListComponent implements OnInit {
     });
   }
 
-  getType(type: number) {
+  getAllMotorbikesForExport(): void {
+    this.motorbikeService.getAllMotorbikeHttp().subscribe((res: any) => {
+      const allMotorbikes = res.result;
+      this.exportService.exportDataToExcel(allMotorbikes, 'MotorbikeData');
+    });
+  }
+
+  getMotorbikeType(type: number) {
     if (type === 1) return 'Xe số';
     else if (type === 2) return 'Xe tay ga';
     return 'Xe tay côn';
   }
 
-  getStatus(status: number) {
+  getMotorbikeStatus(status: number) {
     if (status === 1) return 'Enable';
     else if (status === 2) return 'Busy';
     return 'Maintain';
@@ -74,12 +80,16 @@ export class MotorbikeListComponent implements OnInit {
   }
 
   onSearchInputChange(keyword: string): void {
-    this.searchSubject.next(keyword);
+    this.searchAndFilterMotorbikes();
+  }
+
+  get paginatedMotorbikes(): Motorbike[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.motorbikes.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   calculateTotalPages(): void {
-    const totalItems = this.motorbikes.length;
-    this.totalPages = Math.ceil(totalItems / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.motorbikes.length / this.itemsPerPage);
   }
 
   changePage(page: number): void {
@@ -88,17 +98,25 @@ export class MotorbikeListComponent implements OnInit {
     }
   }
 
-  get paginatedMotorbikes(): Motorbike[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.motorbikes.slice(start, end);
+  toggleImageModal(id: string): void {
+    this.zoomedImageId = this.zoomedImageId === id ? null : id;
   }
 
-  toggleImageModal(id: string): void {
-    if (this.zoomedImageId === id) {
-      this.zoomedImageId = null;
-    } else {
-      this.zoomedImageId = id;
+  sortBy(column: string): void {
+    if (column === 'name') {
+      if (this.sortDescending) {
+        this.motorbikes.sort((a, b) => b.name.localeCompare(a.name));
+      } else {
+        this.motorbikes.sort((a, b) => a.name.localeCompare(b.name));
+      }
+    } else if (column === 'priceDay') {
+      if (this.sortDescending) {
+        this.motorbikes.sort((a, b) => b.priceDay - a.priceDay);
+      } else {
+        this.motorbikes.sort((a, b) => a.priceDay - b.priceDay);
+      }
     }
+    this.sortDescending = !this.sortDescending;
+    this.sortedColumn = column; 
   }
 }
