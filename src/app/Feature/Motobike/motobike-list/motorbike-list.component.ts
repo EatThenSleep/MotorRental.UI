@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MotorbikeService } from '../services/motorbike.service';
 import { Motorbike } from '../models/motorbike.model';
-import { ExportService } from '../services/export.service';
+import { ExportService } from '../../../shared/export.service';
+import { MotorbikeService } from '../services/motorbike.service';
 
 @Component({
   selector: 'app-motorbike-list',
@@ -17,8 +17,8 @@ export class MotorbikeListComponent implements OnInit {
   itemsPerPage: number = 3;
   totalPages: number = 0;
   zoomedImageId: string | null = null;
-  sortedColumn: string = 'name'; 
-  sortDescending: boolean = false; 
+  sortedColumn: string = 'name';
+  sortDescending: boolean = false;
 
   constructor(
     private motorbikeService: MotorbikeService,
@@ -117,6 +117,6 @@ export class MotorbikeListComponent implements OnInit {
       }
     }
     this.sortDescending = !this.sortDescending;
-    this.sortedColumn = column; 
+    this.sortedColumn = column;
   }
 }

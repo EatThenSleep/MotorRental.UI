@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MotorbikeService } from '../services/motorbike.service';
 import { Motorbike } from '../models/motorbike.model';
+import { MotorbikeService } from '../services/motorbike.service';
 
 @Component({
   selector: 'app-motorbike-detail',

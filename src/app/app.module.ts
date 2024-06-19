@@ -8,8 +8,10 @@ import { FooterComponent } from './Core/Component/footer/footer.component';
 import { DashboardsComponent } from './Core/Component/dashboards/dashboards.component';
 import { MotorbikeListComponent } from './Feature/Motobike/motobike-list/motorbike-list.component';
 import { FormsModule } from '@angular/forms';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/motorbike-detail.component'; 
+import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/motorbike-detail.component';
+import { BreadcrumbComponent } from './Core/breadcrumb/breadcrumb.component';
+import { LoginComponent } from './Feature/auth/login/login.component';
+import { MainComponent } from './Core/main/main.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/mo
     MotorbikeListComponent,
     BreadcrumbComponent,
     MotorbikeDetailComponent,
+    LoginComponent,
+    MainComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,  FormsModule],
   providers: [],
