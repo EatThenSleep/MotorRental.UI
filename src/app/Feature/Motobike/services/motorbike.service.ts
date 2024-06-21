@@ -11,7 +11,7 @@ export class MotorbikeService {
   constructor(private http: HttpClient) {}
 
   getAllMotorbikeHttp(): Observable<Motorbike[]> {
-    return this.http.get<Motorbike[]>(`${environment.apiBaseUrl}/Motorbikes/GetALlMotorbikes`);
+    return this.http.get<Motorbike[]>(`${environment.apiBaseUrl}/Motorbikes/GetALlMotorbikesOfOwner?addAuth=true`);
   }
 
   getDetailMotorbikeHttp(id: String): Observable<Motorbike> {

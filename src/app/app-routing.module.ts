@@ -4,14 +4,19 @@ import { MotorbikeListComponent } from './Feature/Motobike/motobike-list/motorbi
 import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/motorbike-detail.component';
 import { LoginComponent } from './Feature/auth/login/login.component';
 import { MainComponent } from './Core/main/main.component';
+import { OwnerAuthGuard } from './Feature/auth/guard/owner.auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {path: '', component:  MainComponent,
+  {
+    path: 'owner',
+    component: MainComponent,
     children: [
       { path: 'motorbike', component: MotorbikeListComponent },
       { path: 'motorbike/detail/:id', component: MotorbikeDetailComponent },
-  ]}
+    ],
+    canActivate: [OwnerAuthGuard],
+  },
 ];
 
 @NgModule({

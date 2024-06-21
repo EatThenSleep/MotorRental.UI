@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Core/Component/header/header.component';
@@ -12,6 +12,7 @@ import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/mo
 import { BreadcrumbComponent } from './Core/breadcrumb/breadcrumb.component';
 import { LoginComponent } from './Feature/auth/login/login.component';
 import { MainComponent } from './Core/main/main.component';
+import { AuthInterceptor } from './Core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import { MainComponent } from './Core/main/main.component';
     MainComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,  FormsModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
