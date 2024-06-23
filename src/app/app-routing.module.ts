@@ -5,6 +5,7 @@ import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/mo
 import { LoginComponent } from './Feature/auth/login/login.component';
 import { MainComponent } from './Core/main/main.component';
 import { OwnerAuthGuard } from './Feature/auth/guard/owner.auth.guard';
+import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,8 @@ const routes: Routes = [
     children: [
       { path: 'motorbike', component: MotorbikeListComponent },
       { path: 'motorbike/detail/:id', component: MotorbikeDetailComponent },
+
+      { path: 'appointments', component: AppointmentsListComponent },
     ],
     canActivate: [OwnerAuthGuard],
   },

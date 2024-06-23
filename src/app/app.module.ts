@@ -13,6 +13,7 @@ import { BreadcrumbComponent } from './Core/breadcrumb/breadcrumb.component';
 import { LoginComponent } from './Feature/auth/login/login.component';
 import { MainComponent } from './Core/main/main.component';
 import { AuthInterceptor } from './Core/interceptors/auth.interceptor';
+import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthInterceptor } from './Core/interceptors/auth.interceptor';
     MotorbikeDetailComponent,
     LoginComponent,
     MainComponent,
+    AppointmentsListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,  FormsModule],
   providers: [
