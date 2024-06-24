@@ -31,6 +31,6 @@ export class MotorbikeService {
       params = params.set('FilterType', type.toString());
     }
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/Motorbikes/GetAllMotorbikes`, { params });
+    return this.http.get<any>(`${environment.apiBaseUrl}/Motorbikes/GetALlMotorbikesOfOwner?addAuth=true`, { params });
   }
 }
