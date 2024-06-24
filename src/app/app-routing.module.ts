@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MotorbikeListComponent } from './Feature/Motobike/motobike-list/motorbike-list.component';
 import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/motorbike-detail.component';
 import { LoginComponent } from './Feature/auth/login/login.component';
-import { MainComponent } from './Core/main/main.component';
+import { MainComponent } from './Core/Component/main/main.component';
 import { OwnerAuthGuard } from './Feature/auth/guard/owner.auth.guard';
 import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
 

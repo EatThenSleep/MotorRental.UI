@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MotorbikeDetailComponent } from './Feature/Motobike/motorbike-detail/motorbike-detail.component';
 import { BreadcrumbComponent } from './Core/breadcrumb/breadcrumb.component';
 import { LoginComponent } from './Feature/auth/login/login.component';
-import { MainComponent } from './Core/main/main.component';
+import { MainComponent } from './Core/Component/main/main.component';
 import { AuthInterceptor } from './Core/interceptors/auth.interceptor';
 import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
 import { DashboardsComponent } from './Core/Component/dashboards/dashboards.component';
@@ -28,7 +28,7 @@ import { DashboardsComponent } from './Core/Component/dashboards/dashboards.comp
     MainComponent,
     AppointmentsListComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule,  FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
