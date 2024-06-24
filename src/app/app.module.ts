@@ -14,6 +14,9 @@ import { MainComponent } from './Core/Component/main/main.component';
 import { AuthInterceptor } from './Core/interceptors/auth.interceptor';
 import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
 import { DashboardsComponent } from './Core/Component/dashboards/dashboards.component';
+import { HomepageComponent } from './Core/homepage/homepage.component';
+import { NavbarComponent } from './Core/homepage/navbar/navbar.component';
+import { FooterHomepageComponent } from './Core/homepage/footer-homepage/footer-homepage.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { DashboardsComponent } from './Core/Component/dashboards/dashboards.comp
     LoginComponent,
     MainComponent,
     AppointmentsListComponent,
+    HomepageComponent,
+    NavbarComponent,
+    FooterHomepageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

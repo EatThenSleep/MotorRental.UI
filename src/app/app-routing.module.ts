@@ -6,6 +6,7 @@ import { LoginComponent } from './Feature/auth/login/login.component';
 import { MainComponent } from './Core/Component/main/main.component';
 import { OwnerAuthGuard } from './Feature/auth/guard/owner.auth.guard';
 import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
+import { HomepageComponent } from './Core/homepage/homepage.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,6 +20,10 @@ const routes: Routes = [
       { path: 'appointments', component: AppointmentsListComponent },
     ],
     canActivate: [OwnerAuthGuard],
+  },
+  {
+    path: '',
+    component: HomepageComponent,
   },
 ];
 
