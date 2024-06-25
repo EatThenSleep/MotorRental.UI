@@ -10,6 +10,7 @@ export class Appointment {
   StatusPayment: number = 0;
   RentalPrice: number = 0;
   Surcharge: Surcharge[] = [];
+  Total: number = 0;
 }
 
 class CustomerAppointment {

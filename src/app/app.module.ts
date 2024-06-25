@@ -23,6 +23,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
 import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
 import { RegisterComponent } from './Feature/auth/register/register.component';
+import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -43,8 +47,9 @@ import { RegisterComponent } from './Feature/auth/register/register.component';
     HomePageListComponent,
     MotorbikeHomeDetailComponent,
     RegisterComponent,
+    AddMotorbikeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,NgxPaginationModule,CommonModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,NgxPaginationModule,CommonModule, AngularEditorModule, BrowserAnimationsModule, ToastrModule.forRoot()],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
