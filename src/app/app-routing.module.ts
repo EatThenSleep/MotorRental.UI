@@ -11,6 +11,7 @@ import { HomepageComponent } from './Core/homepage/homepage.component';
 import { HomePageListComponent } from './Feature/Home/home-page-list/home-page-list.component';
 
 import { RegisterComponent } from './Feature/auth/register/register.component';
+import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
     children: [
       { path: 'motorbike', component: MotorbikeListComponent },
       { path: 'motorbike/detail/:id', component: MotorbikeDetailComponent },
-
+      { path: 'motorbike/add', component: AddMotorbikeComponent },
       { path: 'appointments', component: AppointmentsListComponent },
     ],
     canActivate: [OwnerAuthGuard],
@@ -32,7 +33,7 @@ const routes: Routes = [
     component: HomepageComponent,
     children: [
     { path: '', component: HomePageListComponent },
-    { path: 'motorbike/:id', component: MotorbikeHomeDetailComponent },
+    { path: 'motorbike/:id', component: MotorbikeDetailComponent },
     ]
   },
 ];
