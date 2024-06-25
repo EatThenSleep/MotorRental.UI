@@ -17,6 +17,7 @@ import { DashboardsComponent } from './Core/Component/dashboards/dashboards.comp
 import { HomepageComponent } from './Core/homepage/homepage.component';
 import { NavbarComponent } from './Core/homepage/navbar/navbar.component';
 import { FooterHomepageComponent } from './Core/homepage/footer-homepage/footer-homepage.component';
+import { RegisterComponent } from './Feature/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FooterHomepageComponent } from './Core/homepage/footer-homepage/footer-
     HomepageComponent,
     NavbarComponent,
     FooterHomepageComponent,
+    RegisterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
