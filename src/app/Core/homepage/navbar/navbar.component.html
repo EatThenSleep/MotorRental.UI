@@ -29,43 +29,29 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <!-- left menu -->
       <ul class="navbar-nav mr-auto align-items-center">
-        <li class="nav-item mx-lg-1">
+        <!-- <li class="nav-item mx-lg-1">
           <a class="nav-link active" href="">Home</a>
-        </li>
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" href="">Features</a>
-        </li>
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" href="">Pricing</a>
-        </li>
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" href="">FAQs</a>
-        </li>
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" href="">Clients</a>
-        </li>
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" href="">Contact</a>
-        </li>
+        </li> -->
       </ul>
 
       <!-- right menu -->
       <ul class="navbar-nav ml-auto align-items-center">
-        <li class="nav-item mr-0">
-          <a
-            href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
-            target="_blank"
-            class="nav-link d-lg-none"
-            >Purchase now</a
-          >
-          <a
-            href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
-            target="_blank"
-            class="btn btn-sm btn-light btn-rounded d-none d-lg-inline-flex"
-          >
-            <i class="mdi mdi-basket mr-2"></i> Purchase Now
-          </a>
-        </li>
+        <ng-container *ngIf="user === undefined;else showLogout">
+          <li class="nav-item mr-0">
+            <a class="nav-link" routerLink="/login">Sign In</a>
+          </li>
+          <li class="nav-item mr-0">
+            <a class="nav-link" routerLink="/register">Sign Up</a>
+          </li>
+        </ng-container>
+        <ng-template #showLogout>
+          <li class="nav-item mr-0">
+            <h5 class="card-title mb-0 mr-2">{{user?.email}}</h5>
+          </li>
+          <li class="nav-item mr-0">
+            <a class="nav-link" (click)="onLogout()">Log out</a>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>
