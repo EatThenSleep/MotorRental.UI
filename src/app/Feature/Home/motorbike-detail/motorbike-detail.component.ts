@@ -34,6 +34,7 @@ export class MotorbikeHomeDetailComponent implements OnInit {
     this.motorbikeService.getDetailMotorbikeHttp(id).subscribe(
       (response: any) => {
         if (response.isSuccess) {
+          console.log(response)
           this.motorbike = response.result;
         } else {
           console.error('Failed to fetch motorbike details');
