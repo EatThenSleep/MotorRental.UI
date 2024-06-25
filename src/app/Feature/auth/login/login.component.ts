@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { LoginRequest } from '../models/login-request.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
@@ -10,7 +10,7 @@ import { HttpStatusCode } from '@angular/common/http';
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   model: LoginRequest;
   loginSubscription?: Subscription;
 
@@ -50,11 +50,18 @@ export class LoginComponent {
           }
 
           // return homepage will code here
+          else{
+            this.router.navigateByUrl('')
+          }
         },
         error: (response) => {
           // will alert error here
         },
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.loginSubscription?.unsubscribe()
   }
 }

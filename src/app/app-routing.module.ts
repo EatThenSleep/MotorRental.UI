@@ -7,11 +7,15 @@ import { MainComponent } from './Core/Component/main/main.component';
 import { OwnerAuthGuard } from './Feature/auth/guard/owner.auth.guard';
 import { AppointmentsListComponent } from './Feature/Appointments/appointments-list/appointments-list.component';
 import { HomepageComponent } from './Core/homepage/homepage.component';
+
 import { HomePageListComponent } from './Feature/Home/home-page-list/home-page-list.component';
-import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
+
+import { RegisterComponent } from './Feature/auth/register/register.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'owner',
     component: MainComponent,
