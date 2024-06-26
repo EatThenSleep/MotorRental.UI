@@ -12,6 +12,7 @@ import { HomePageListComponent } from './Feature/Home/home-page-list/home-page-l
 
 import { RegisterComponent } from './Feature/auth/register/register.component';
 import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
+import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
 
 
 const routes: Routes = [
