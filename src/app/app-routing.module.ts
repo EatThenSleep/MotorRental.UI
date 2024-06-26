@@ -11,9 +11,15 @@ import { HomepageComponent } from './Core/homepage/homepage.component';
 import { HomePageListComponent } from './Feature/Home/home-page-list/home-page-list.component';
 
 import { RegisterComponent } from './Feature/auth/register/register.component';
+
 import { MotorbikeRentalComponent } from './Feature/Home/motorbike-rental/motorbike-rental.component';
 import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
 import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/appointment-history.component';
+
+import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
+import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
+import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenue/statistic-revenue.component';
+import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
 
 
 const routes: Routes = [
@@ -25,8 +31,12 @@ const routes: Routes = [
     children: [
       { path: 'motorbike', component: MotorbikeListComponent },
       { path: 'motorbike/detail/:id', component: MotorbikeDetailComponent },
-
+      { path: 'motorbike/add', component: AddMotorbikeComponent },
       { path: 'appointments', component: AppointmentsListComponent },
+
+      { path: 'statistic/revenue', component: StatisticRevenueComponent },
+      { path: 'statistic/motorbike', component: StatisticMotorbikeComponent },
+
     ],
     canActivate: [OwnerAuthGuard],
   },
@@ -38,6 +48,7 @@ const routes: Routes = [
     { path: 'motorbike/:id', component: MotorbikeHomeDetailComponent },
     { path: 'motorbike-rental/:id', component: MotorbikeRentalComponent },
     { path: 'appointment-history', component: AppointmentHistoryComponent },
+ 
     ]
   },
 ];

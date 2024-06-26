@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Motorbike } from '../models/motorbike.model';
 import { ExportService } from '../../../shared/export.service';
 import { MotorbikeService } from '../services/motorbike.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 @Component({
   selector: 'app-motorbike-list',
   templateUrl: './motorbike-list.component.html',
@@ -22,7 +23,8 @@ export class MotorbikeListComponent implements OnInit {
 
   constructor(
     private motorbikeService: MotorbikeService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -30,10 +32,8 @@ export class MotorbikeListComponent implements OnInit {
   }
 
   getAllMotorbikes(): void {
-    this.currentPage = 1;
     this.motorbikeService.getAllMotorbikeHttp().subscribe((res: any) => {
       this.motorbikes = res.result;
-      this.calculateTotalPages();
     });
   }
 
@@ -57,6 +57,7 @@ export class MotorbikeListComponent implements OnInit {
   }
 
   clearSearchAndFilter(): void {
+    this.currentPage = 1
     this.keyword = '';
     this.selectedStatus = '';
     this.selectedType = '';
@@ -64,10 +65,8 @@ export class MotorbikeListComponent implements OnInit {
   }
 
   searchAndFilterMotorbikes(): void {
-    this.currentPage = 1;
-    const status = this.selectedStatus
-      ? Number(this.selectedStatus)
-      : undefined;
+    this.currentPage = 1
+    const status = this.selectedStatus ? Number(this.selectedStatus) : undefined;
     const type = this.selectedType ? Number(this.selectedType) : undefined;
     const keyword = this.keyword.trim() || undefined;
 
@@ -75,27 +74,11 @@ export class MotorbikeListComponent implements OnInit {
       .searchAndFilterHttp(keyword, status, type)
       .subscribe((res: any) => {
         this.motorbikes = res.result;
-        this.calculateTotalPages();
       });
   }
 
-  onSearchInputChange(keyword: string): void {
+  onSearchInputChange(): void {
     this.searchAndFilterMotorbikes();
-  }
-
-  get paginatedMotorbikes(): Motorbike[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.motorbikes.slice(startIndex, startIndex + this.itemsPerPage);
-  }
-
-  calculateTotalPages(): void {
-    this.totalPages = Math.ceil(this.motorbikes.length / this.itemsPerPage);
-  }
-
-  changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-    }
   }
 
   toggleImageModal(id: string): void {
@@ -118,5 +101,21 @@ export class MotorbikeListComponent implements OnInit {
     }
     this.sortDescending = !this.sortDescending;
     this.sortedColumn = column;
+  }
+
+  confirmDelete(motorbikeId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {position: {}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteMotorbike(motorbikeId);
+      }
+    });
+  }
+
+  deleteMotorbike(motorbikeId: string): void {
+    this.motorbikeService.deleteMotorbikeHttp(motorbikeId).subscribe(() => {
+      this.motorbikes = this.motorbikes.filter(m => m.id !== motorbikeId);
+    });
   }
 }

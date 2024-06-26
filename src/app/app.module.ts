@@ -17,17 +17,26 @@ import { DashboardsComponent } from './Core/Component/dashboards/dashboards.comp
 import { HomepageComponent } from './Core/homepage/homepage.component';
 import { NavbarComponent } from './Core/homepage/navbar/navbar.component';
 import { FooterHomepageComponent } from './Core/homepage/footer-homepage/footer-homepage.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { HomePageListComponent } from './Feature/Home/home-page-list/home-page-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
 import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
 import { RegisterComponent } from './Feature/auth/register/register.component';
+
 import { MotorbikeRentalComponent } from './Feature/Home/motorbike-rental/motorbike-rental.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/appointment-history.component';
 
+import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ConfirmDeleteDialogComponent } from './Feature/Motobike/confirm-delete-dialog/confirm-delete-dialog.component';
+import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenue/statistic-revenue.component';
+import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
+import { AgChartsAngularModule } from 'ag-charts-angular';
 
 @NgModule({
   declarations: [
@@ -35,6 +44,7 @@ import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/
     HeaderComponent,
     FooterComponent,
     DashboardsComponent,
+
     MotorbikeListComponent,
     BreadcrumbComponent,
     MotorbikeDetailComponent,
@@ -51,6 +61,23 @@ import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/
     AppointmentHistoryComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,NgxPaginationModule,CommonModule,BrowserAnimationsModule,ToastrModule.forRoot(),
+    AddMotorbikeComponent,
+    ConfirmDeleteDialogComponent,
+    StatisticRevenueComponent,
+    StatisticMotorbikeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule,
+    CommonModule,
+    AngularEditorModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MatDialogModule,
+    AgChartsAngularModule,
   ],
   providers: [
     {
