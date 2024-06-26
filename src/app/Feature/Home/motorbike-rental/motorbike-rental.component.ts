@@ -101,6 +101,7 @@ export class MotorbikeRentalComponent {
       this.toastr.error('Ngày thuê xe không hợp lệ', 'Lỗi');
       return;
     }
+    
     const rental: MotorBikeRental = {
       MortobikeId: this.motorbike.id,
       OwnerID: this.ownerID,
