@@ -1,3 +1,6 @@
+<section class="py-5" >
+    <div class="container">
+
 <div *ngIf="motorbike" class="container mt-4">
     <div class="avatar-section">
         <img [src]="motorbike.motorbikeAvatar" class="img-fluid rounded" style="width: 90%; max-height: 600px; object-fit: cover;"/>
@@ -81,7 +84,7 @@
             <button class="btn btn-primary mr-2" (click)="goToHomePage()">
                 <i class="fas fa-home"></i> Quay lại trang chủ
             </button>
-            <button class="btn btn-success">
+            <button class="btn btn-success" [disabled]="motorbike.status !== 1" (click)="motorBikeRental(motorbike.id)">
                 <i class="fas fa-shopping-cart"></i> Thuê xe
             </button>
         </div>
@@ -90,3 +93,5 @@
 <div *ngIf="!motorbike" class="d-flex justify-content-center mt-4">
     <div class="progress-circular"></div>
 </div>
+</div>
+</section>
