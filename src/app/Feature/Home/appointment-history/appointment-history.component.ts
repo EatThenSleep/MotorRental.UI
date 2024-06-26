@@ -34,7 +34,6 @@ export class AppointmentHistoryComponent {
           temp.Owner.id = result[i].owner.id;
           temp.Owner.name = result[i].owner.name;
           temp.Owner.phoneNumber = result[i].owner.phoneNumber;
-          console.log(temp.Owner.phoneNumber);
           temp.Motorbike.id = result[i].motorbike.id;
           temp.Motorbike.name = result[i].motorbike.name;
           temp.Motorbike.licensePlate = result[i].motorbike.licensePlate;
@@ -48,12 +47,10 @@ export class AppointmentHistoryComponent {
   
           if (Array.isArray(result[i].surcharges)) {
             for (let j = 0; j < result[i].surcharges.length; j++) {
-              temp.Surcharge.push(result[i].surcharges[j]);
+              temp.Surcharge.push(result[i].surcharges[j]);  
             }
-          }
-          
+          } 
           temp.Total = temp.RentalPrice + temp.Surcharge.reduce((acc, curr) => acc + curr.amount, 0);
-  
           this.appointments.push(temp);
         }
       }

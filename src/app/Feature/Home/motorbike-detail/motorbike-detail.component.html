@@ -81,12 +81,14 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-primary mr-2" (click)="goToHomePage()">
+            <!-- <button class="btn btn-primary mr-2" (click)="goToHomePage()">
                 <i class="fas fa-home"></i> Quay lại trang chủ
-            </button>
-            <button class="btn btn-success" [disabled]="motorbike.status !== 1" (click)="motorBikeRental(motorbike.id)">
-                <i class="fas fa-shopping-cart"></i> Thuê xe
-            </button>
+            </button> -->
+            <div class="text-center mt-4">
+                <button class="btn btn-success" [disabled]="motorbike.status !== 1" (click)="motorBikeRental(motorbike.id)">
+                    <i class="fas fa-shopping-cart"></i> Thuê xe
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -9,7 +9,7 @@ export class Appointment {
     StatusAppointment: number = 0;
     StatusPayment: number = 0;
     RentalPrice: number = 0;
-    Surcharge: Surcharge[] = [];
+    Surcharge: Surcharge[] = []; 
     Total: number = 0;
   }
   
@@ -24,7 +24,7 @@ export class Appointment {
     licensePlate: string = '';
   }
   
-  class Surcharge{
+  export class Surcharge{
     amount: number = 0;
     reason: string = "";
   }

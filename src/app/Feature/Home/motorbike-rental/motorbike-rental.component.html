@@ -85,7 +85,7 @@
 
     <!-- Biểu mẫu thuê xe -->
     <div class="col-lg-6">
-      <h1>Thuê xe: {{ motorbike.name }}</h1>
+      <h1 style="margin-left: 78px;">Thuê xe: {{ motorbike.name }}</h1>
       <form (ngSubmit)="onSubmit()">
         <div class="form-group">
           <div class="row">
@@ -107,11 +107,12 @@
           <label for="totalPrice">Tổng tiền thuê:</label>
           <input type="text" id="totalPrice" [value]="totalRentalPrice | currency" class="form-control" readonly>
         </div>
-        <button type="submit" class="btn btn-primary">Thuê xe</button>
+        <button type="submit" class="btn btn-warning">Thuê xe</button>
       </form>
     </div>
   </div>
 </div>
+<br>
 
 <div *ngIf="!motorbike" class="d-flex justify-content-center mt-4">
   <div class="progress-circular"></div>

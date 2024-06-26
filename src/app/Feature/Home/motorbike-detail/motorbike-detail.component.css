@@ -60,48 +60,6 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.motorbike-info {
-    margin-top: 2rem;
-}
-
-.motorbike-info h3 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.motorbike-info p {
-    font-size: 1rem;
-}
-
-.badge {
-    font-size: 1rem;
-    padding: 10px 20px;
-    border-radius: 20px;
-}
-
-.large-badge {
-    font-size: 1.2rem;
-}
-
-.motorbike-info .d-flex {
-    margin-bottom: 1rem;
-}
-
-.motorbike-info h4 {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-.motorbike-info h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.row .col-md-6 {
-    margin-bottom: 1rem;
-}
-
 button.btn {
     padding: 10px 20px;
     font-size: 1rem;
@@ -129,36 +87,9 @@ button.btn {
     background-color: #218838;
     border-color: #1e7e34;
 }
-
-/* Responsive Design */
 @media (max-width: 768px) {
     .avatar-section img {
         width: 100%;
         height: auto;
-    }
-
-    .motorbike-info {
-        text-align: center;
-    }
-
-    .motorbike-info h3 {
-        font-size: 1.5rem;
-    }
-
-    .motorbike-info p {
-        font-size: 1rem;
-    }
-
-    .motorbike-info .d-flex {
-        justify-content: center;
-    }
-
-    .row .col-md-6 {
-        margin-bottom: 1rem;
-    }
-
-    button.btn {
-        width: 100%;
-        margin-bottom: 1rem;
     }
 }

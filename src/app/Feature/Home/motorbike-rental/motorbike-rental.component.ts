@@ -5,8 +5,6 @@ import { MotorbikeService } from '../services/motorbike.service';
 import { MotorBikeRental } from '../models/motorbikerental.model';
 import { ToastrService } from 'ngx-toastr';
 
-
-
 @Component({
   selector: 'app-motorbike-rental',
   templateUrl: './motorbike-rental.component.html',
@@ -66,7 +64,6 @@ export class MotorbikeRentalComponent {
     if (!this.motorbike || !this.rentalBegin || !this.rentalEnd) {
       return 0;
     }
-  
     const beginDate = new Date(this.rentalBegin);
     const endDate = new Date(this.rentalEnd);
     const diffTime = endDate.getTime() - beginDate.getTime();
@@ -75,7 +72,7 @@ export class MotorbikeRentalComponent {
     const dayPrice = this.motorbike.priceDay;
     const weekPrice = this.motorbike.priceWeek;
     const monthPrice = this.motorbike.priceMonth;
-  
+
     if (diffDays < 7) {
       return diffDays * dayPrice;
     } else if (diffDays >= 7 && diffDays < 30) {
@@ -91,31 +88,40 @@ export class MotorbikeRentalComponent {
   }
 
   onSubmit(): void {
-    this.updateTotalRentalPrice();
-    if (this.motorbike &&this.rentalBegin && this.rentalEnd &&this.locationReceive &&this.ownerID) {
-      const rental: MotorBikeRental = {
-        MortobikeId: this.motorbike.id,
-        OwnerID: this.ownerID,
-        RentalBegin: this.rentalBegin,
-        RentalEnd: this.rentalEnd,
-        LocationRenceive: this.locationReceive,
-        RentalPrice: this.totalRentalPrice
-      };
-      this.motorbikeService.rentMotorbike(rental).subscribe(
-        response => {
-          this.toastr.success('Thuê xe thành công!', 'Thành công');
-        },
-        error => {
-          if (error.status === 401) {
-            this.toastr.error('Vui lòng đăng nhập để thực hiện thuê xe!', 'Lỗi');
-            this.router.navigate(['login']);
-          } else {
-            this.toastr.error('Thuê xe thất bại', 'Lỗi');
-          }
-        }
-      );
-    } else {
+    if (!this.motorbike || !this.rentalBegin || !this.rentalEnd || !this.locationReceive || !this.ownerID) {
       this.toastr.error('Vui lòng điền đầy đủ thông tin');
+      return;
     }
+
+    const today = new Date();
+    const beginDate = new Date(this.rentalBegin);
+    const endDate = new Date(this.rentalEnd);
+
+    if (beginDate < today || endDate < beginDate) {
+      this.toastr.error('Ngày thuê xe không hợp lệ', 'Lỗi');
+      return;
+    }
+    const rental: MotorBikeRental = {
+      MortobikeId: this.motorbike.id,
+      OwnerID: this.ownerID,
+      RentalBegin: this.rentalBegin,
+      RentalEnd: this.rentalEnd,
+      LocationRenceive: this.locationReceive,
+      RentalPrice: this.totalRentalPrice
+    };
+  
+    this.motorbikeService.rentMotorbike(rental).subscribe(
+      response => {
+        this.toastr.success('Thuê xe thành công!', 'Thành công');
+      },
+      error => {
+        if (error.status === 401) {
+          this.toastr.error('Vui lòng đăng nhập để thực hiện thuê xe!', 'Lỗi');
+          this.router.navigate(['login']);
+        } else {
+          this.toastr.error('Thuê xe thất bại', 'Lỗi');
+        }
+      }
+    );
   }
 }
