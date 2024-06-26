@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
-import { Motorbike } from '../home-page-list/models/motorbike.model';
+import { Motorbike } from '../models/motorbike.model';
 import { MotorbikeService } from '../services/motorbike.service';
 
 @Component({
@@ -30,6 +30,10 @@ export class MotorbikeHomeDetailComponent implements OnInit {
   goToHomePage() {
     this.router.navigate(['/']);
 }
+motorBikeRental(motorbikeId: string): void {
+  this.router.navigate(['/motorbike-rental', motorbikeId]);
+}
+
   getMotorbike(id: string): void {
     this.motorbikeService.getDetailMotorbikeHttp(id).subscribe(
       (response: any) => {

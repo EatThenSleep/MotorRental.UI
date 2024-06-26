@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MotorbikeService } from '../services/motorbike.service';
-import { Motorbike } from './models/motorbike.model';
+import { Motorbike } from '../models/motorbike.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,12 +13,10 @@ export class HomePageListComponent implements OnInit {
   filteredMotorbikes: Motorbike[] = [];
   keyword: string = '';
   selectedType: string = '';
+  selectedStatus: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 6;
   totalPages: number = 0;
-  zoomedImageId: string | null = null;
-  sortedColumn: string = 'name';
-  sortDescending: boolean = false;
 
   constructor(private motorbikeService: MotorbikeService, private router: Router) {}
 
@@ -36,7 +34,9 @@ export class HomePageListComponent implements OnInit {
 
   applyFilters(): void {
     this.filteredMotorbikes = this.motorbikes.filter(motorbike => {
-      return (!this.selectedType || motorbike.type.toString() === this.selectedType);
+      const matchesType = !this.selectedType || motorbike.type.toString() === this.selectedType;
+      const matchesStatus = !this.selectedStatus || motorbike.status.toString() === this.selectedStatus;
+      return matchesType && matchesStatus;
     });
   }
 
@@ -50,32 +50,29 @@ export class HomePageListComponent implements OnInit {
     });
   }
 
-  onSearchInputChange(keyword: string | null): void {
-    if (keyword !== null) {
-      this.keyword = keyword;
+  onSearchInputChange(): void {
       this.searchAndFilterMotorbikes();
-    }
+ 
   }
 
   viewDetail(motorbikeId: string): void {
     this.router.navigate(['/motorbike', motorbikeId]);
   }
 
-  getFormattedType(type: number): string {
-    if(type ===1){
-      return 'Xe số';
-    }
-    else if(type===2){
-      return 'Xe tay ga';
-    }
-    else{
-        return 'Xe côn';
-    }
+  motorBikeRental(motorbikeId: string): void {
+    this.router.navigate(['/motorbike-rental', motorbikeId]);
   }
-  
 
-  onTypeFilterChange(type: string): void {
-    this.selectedType = type;
-    this.applyFilters();
+  getFormattedType(type: number): string {
+    switch (type) {
+      case 1:
+        return 'Xe số';
+      case 2:
+        return 'Xe tay ga';
+      case 3:
+        return 'Xe tay côn';
+      default:
+        return 'Không xác định';
+    }
   }
 }

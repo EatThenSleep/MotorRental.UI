@@ -1,8 +1,10 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Motorbike } from "../home-page-list/models/motorbike.model";
+import { Motorbike } from "../models/motorbike.model";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment.development";
+import { MotorBikeRental } from "../models/motorbikerental.model";
+import { Appointment } from "../models/appointment.model";
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,7 @@ export class MotorbikeService {
   }
 
   getDetailMotorbikeHttp(id: string): Observable<Motorbike> {
-    console.log(`${environment.apiBaseUrl}/Motorbikes/${id}`); // Log URL để kiểm tra
+    console.log(`${environment.apiBaseUrl}/Motorbikes/${id}`);
     return this.http.get<Motorbike>(`${environment.apiBaseUrl}/Motorbikes/${id}`);
   }
 
@@ -32,5 +34,20 @@ export class MotorbikeService {
 
     return this.http.get<any>(`${environment.apiBaseUrl}/Motorbikes/GetAllMotorbikes`, { params });
   }
-  
+  rentMotorbike(rental: MotorBikeRental): Observable<MotorBikeRental> {
+    const formData = new FormData();
+    formData.append('MotorbikeId', rental.MortobikeId);
+    formData.append('OwnerId', rental.OwnerID);
+    formData.append('RentalBegin', rental.RentalBegin.toString());
+    formData.append('RentalEnd', rental.RentalEnd.toString());
+    formData.append('LocationReceive', rental.LocationRenceive);
+    formData.append('RentalPrice', rental.RentalPrice.toString());
+
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+
+    return this.http.post<MotorBikeRental>(`${environment.apiBaseUrl}/Appointment?addAuth=true`, formData, { headers: headers });
+  }
+  getAppointmentsHttp(): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${environment.apiBaseUrl}/Appointment/GetAppointment?addAuth=true`);
+  }
 }

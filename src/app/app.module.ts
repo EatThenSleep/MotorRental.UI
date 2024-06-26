@@ -23,6 +23,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
 import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
 import { RegisterComponent } from './Feature/auth/register/register.component';
+
+import { MotorbikeRentalComponent } from './Feature/Home/motorbike-rental/motorbike-rental.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/appointment-history.component';
+
 import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,6 +57,10 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
     HomePageListComponent,
     MotorbikeHomeDetailComponent,
     RegisterComponent,
+    MotorbikeRentalComponent,
+    AppointmentHistoryComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,NgxPaginationModule,CommonModule,BrowserAnimationsModule,ToastrModule.forRoot(),
     AddMotorbikeComponent,
     ConfirmDeleteDialogComponent,
     StatisticRevenueComponent,
