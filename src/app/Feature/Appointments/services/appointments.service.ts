@@ -14,4 +14,13 @@ export class AppointmentsService {
   getAppointmentsHttp(): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${environment.apiBaseUrl}/Appointment/GetAppointment?addAuth=true`);
   }
+
+  acceptAppointmentHttp(id: string): Observable<any> {
+    return this.http.patch(`${environment.apiBaseUrl}/Appointment/Aceept?id=${id}&addAuth=true`, {});
+  }
+
+  rejectAppointmentHttp(id: string): Observable<any> {
+    return this.http.put(`${environment.apiBaseUrl}/Appointment/Reject?id=${id}&addAuth=true`, {});
+  }
+  
 }

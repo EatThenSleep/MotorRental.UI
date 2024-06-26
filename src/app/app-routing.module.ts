@@ -35,7 +35,7 @@ const routes: Routes = [
     component: HomepageComponent,
     children: [
     { path: '', component: HomePageListComponent },
-    { path: 'motorbike/:id', component: MotorbikeHomeDetailComponent },
+    { path: 'motorbike/:id', component: MotorbikeDetailComponent },
     ]
   },
 ];

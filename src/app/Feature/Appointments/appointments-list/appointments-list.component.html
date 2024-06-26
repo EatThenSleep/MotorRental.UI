@@ -21,7 +21,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let appoint of paginatedAppointments">
+              <tr
+                *ngFor="
+                  let appoint of appointments
+                    | paginate
+                      : {
+                          itemsPerPage: itemsPerPage,
+                          currentPage: currentPage
+                        };
+                  let i = index
+                "
+              >
                 <td>{{ appoint.Id }}</td>
                 <td>
                   <a
@@ -57,18 +67,16 @@
                 </td>
                 <td>
                   <span
-                    *ngIf="appoint.RentalReturn === '0001-01-01T00:00:00'"
+                    *ngIf="appoint.StatusAppointment != 3"
                     style="font-size: 14px; border-radius: 8px"
                     class="badge badge-primary-lighten"
                   >
                     Chưa trả xe
                   </span>
-                  <span *ngIf="appoint.RentalReturn !== '0001-01-01T00:00:00'">
-                    {{ appoint.RentalReturn | date : "longDate" }}
-                    {{ appoint.RentalReturn | date : "HH:mm" }}
+                  <span *ngIf="appoint.StatusAppointment == 3">
+                    {{ getCurrentDate() }}
                   </span>
                 </td>
-
                 <td>{{ appoint.LocationReceive }}</td>
                 <td>
                   <div class="d-flex justify-content-center align-items-center">
@@ -116,7 +124,15 @@
                 </td>
                 <td>{{ appoint.Total }}</td>
                 <td class="d-flex justify-content-between margin-action">
-                  <div class="action" style="color: green">
+                  <div *ngIf="appoint.StatusAppointment === 3 || appoint.StatusAppointment === 2"></div>
+                  <div
+                    *ngIf="
+                      appoint.StatusAppointment === 0
+                    "
+                    class="action"
+                    style="color: green"
+                    (click)="acceptAppointment(appoint.Id)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -133,10 +149,46 @@
                       />
                     </svg>
                   </div>
-                  <div class="action" style="color: red">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-x" viewBox="0 0 16 16">
-                      <path d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"/>
-                      <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"/>
+                  <div
+                    *ngIf="
+                      appoint.StatusAppointment === 0
+                    "
+                    class="action"
+                    style="color: red"
+                    (click)="rejectAppointment(appoint.Id)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-file-x"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"
+                      />
+                      <path
+                        d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    *ngIf="appoint.StatusAppointment === 1"
+                    class="action"
+                    style="color: green"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-currency-dollar"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"
+                      />
                     </svg>
                   </div>
                 </td>
@@ -144,53 +196,11 @@
             </tbody>
           </table>
         </div>
-        <div
-        class="pagination-controls d-flex justify-content-center align-items-center mt-3"
-      >
-        <button
-          class="mr-2 btn-primary"
-          (click)="changePage(currentPage - 1)"
-          [disabled]="currentPage === 1"
-          [ngClass]="{ 'disabled-btn': currentPage === 1 }"
-          style="border-radius: 8px"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-arrow-left"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
-            />
-          </svg>
-        </button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button
-          style="border-radius: 8px"
-          class="ml-2 btn-primary"
-          (click)="changePage(currentPage + 1)"
-          [disabled]="currentPage === totalPages"
-          [ngClass]="{ 'disabled-btn': currentPage === totalPages }"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-arrow-right"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
-            />
-          </svg>
-        </button>
-      </div>
+        <div class="d-flex justify-content-center mt-4">
+          <pagination-controls
+            (pageChange)="currentPage = $event"
+          ></pagination-controls>
+        </div>
       </div>
     </div>
   </div>

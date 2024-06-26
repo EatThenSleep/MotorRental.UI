@@ -86,7 +86,6 @@ export class AddMotorbikeComponent implements AfterViewInit, OnInit {
     }
   }
   
-
   addMotorbike() {
     this.motorbikeService.addMotorbikeHttp(this.motorbike).subscribe({
       next: res => {

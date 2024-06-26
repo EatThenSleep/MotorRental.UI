@@ -43,7 +43,9 @@ export class MotorbikeService {
 
     return this.http.post<any>(`${environment.apiBaseUrl}/Motorbikes?addAuth=true`, formData);
   }
-
+  deleteMotorbikeHttp(motorbikeId: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiBaseUrl}/Motorbikes/${motorbikeId}?addAuth=true`);
+  }
 
   searchAndFilterHttp(keyword?: string, status?: number, type?: number): Observable<any> {
     let params = new HttpParams();
