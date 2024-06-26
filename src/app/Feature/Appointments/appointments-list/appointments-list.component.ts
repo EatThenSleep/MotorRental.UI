@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AppointmentsService } from '../services/appointments.service';
 import { Appointment } from '../models/Appointment.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-appointments-list',
@@ -13,7 +14,7 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
   itemsPerPage: number = 3;
   totalPages: number = 0;
 
-  constructor(private appointmentService: AppointmentsService) {}
+  constructor(private appointmentService: AppointmentsService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getAllAppointment();
@@ -51,7 +52,6 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
 
           this.appointments.push(temp);
         }
-        this.calculateTotalPages();
       }
     });
   }
@@ -68,18 +68,30 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
     return 'Paid';
   }
 
-  get paginatedAppointments(): Appointment[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.appointments.slice(startIndex, startIndex + this.itemsPerPage);
+  acceptAppointment(id: string): void {
+    this.appointmentService.acceptAppointmentHttp(id).subscribe({
+      next: () => {
+        this.toastr.success('Accept successfully!');
+      },
+      error: () => {
+        this.toastr.error('Accept failed!');
+      },
+    });
   }
 
-  calculateTotalPages(): void {
-    this.totalPages = Math.ceil(this.appointments.length / this.itemsPerPage);
+  rejectAppointment(id: string): void {
+    this.appointmentService.rejectAppointmentHttp(id).subscribe({
+      next: () => {
+        this.toastr.success('Reject successfully!');
+      },
+      error: () => {
+        this.toastr.success('Reject failed!');
+      },
+    });
   }
 
-  changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-    }
+  getCurrentDate(): string {
+    const now = new Date();
+    return `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
   }
 }
