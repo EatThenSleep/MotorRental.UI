@@ -22,5 +22,20 @@ export class AppointmentsService {
   rejectAppointmentHttp(id: string): Observable<any> {
     return this.http.put(`${environment.apiBaseUrl}/Appointment/Reject?id=${id}&addAuth=true`, {});
   }
+
+  returnWithoutPaymentHttp(id: string, amount: number, reason: string): Observable<any> {
+    const body = [
+      {
+        amount: amount,
+        reason: reason
+      }
+    ];
+    return this.http.put(`${environment.apiBaseUrl}/Appointment/Return without payment?id=${id}&addAuth=true`, body);
+  }
+  
+  
+  finishPaymentHttp(id: string): Observable<any> {
+    return this.http.put(`${environment.apiBaseUrl}/Appointment/FinishPayment?id=${id}&addAuth=true`, {});
+  }
   
 }

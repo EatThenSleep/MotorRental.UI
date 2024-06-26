@@ -86,11 +86,11 @@
                       [ngClass]="{
                         'badge badge-primary-lighten':
                           appoint.StatusAppointment === 0,
-                        'badge badge-danger-lighten':
-                          appoint.StatusAppointment === 1,
-                        'badge badge-info-lighten':
-                          appoint.StatusAppointment === 2,
                         'badge badge-success-lighten':
+                          appoint.StatusAppointment === 1,
+                        'badge badge-danger-lighten':
+                          appoint.StatusAppointment === 2,
+                        'badge badge-info-lighten':
                           appoint.StatusAppointment === 3
                       }"
                     >
@@ -123,74 +123,66 @@
                   </ul>
                 </td>
                 <td>{{ appoint.Total }}</td>
-                <td class="d-flex justify-content-between margin-action">
-                  <div *ngIf="appoint.StatusAppointment === 3 || appoint.StatusAppointment === 2"></div>
+                <td class="d-flex justify-content-around margin-action">
                   <div
                     *ngIf="
-                      appoint.StatusAppointment === 0
+                      appoint.StatusAppointment === 3 ||
+                      appoint.StatusAppointment === 2
                     "
-                    class="action"
-                    style="color: green"
+                  ></div>
+                  <button
+                    *ngIf="appoint.StatusAppointment === 0"
+                    type="button"
+                    class="btn btn-success mt-n1"
+                    style="white-space: nowrap; overflow: hidden"
                     (click)="acceptAppointment(appoint.Id)"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-check2-circle"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"
-                      />
-                      <path
-                        d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div
-                    *ngIf="
-                      appoint.StatusAppointment === 0
-                    "
-                    class="action"
-                    style="color: red"
+                    Accept
+                  </button>
+                  <button
+                    *ngIf="appoint.StatusAppointment === 0"
+                    type="button"
+                    class="btn btn-success mt-n1"
+                    style="white-space: nowrap; overflow: hidden"
                     (click)="rejectAppointment(appoint.Id)"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-file-x"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"
-                      />
-                      <path
-                        d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"
-                      />
-                    </svg>
-                  </div>
-                  <div
-                    *ngIf="appoint.StatusAppointment === 1"
-                    class="action"
-                    style="color: green"
+                    Reject
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success mt-n1 ml-n4"
+                    style="white-space: nowrap; overflow: hidden"
+                    (click)="returnWithoutPaymentAppointment(appoint.Id)"
+                    *ngIf="
+                      appoint.StatusAppointment === 1 
+                    "
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-currency-dollar"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"
-                      />
-                    </svg>
-                  </div>
+                    Return
+                  </button>
+
+                  <button
+                    *ngIf="
+                      appoint.StatusAppointment === 3 &&
+                      appoint.StatusPayment === 0
+                    "
+                    type="button"
+                    class="btn btn-success mt-n1 ml-n4"
+                    style="white-space: nowrap; overflow: hidden"
+                    (click)="finishPaymentAppointment(appoint.Id)"
+                  >
+                    Payment
+                  </button>
+                  <button
+                    *ngIf="
+                      appoint.StatusAppointment === 3 &&
+                      appoint.StatusPayment === 1
+                    "
+                    type="button"
+                    class="btn btn-success mt-n1 ml-n4"
+                    style="white-space: nowrap; overflow: hidden"
+                  >
+                    Finished
+                  </button>
                 </td>
               </tr>
             </tbody>
