@@ -28,9 +28,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDeleteDialogComponent } from './Feature/Motobike/confirm-delete-dialog/confirm-delete-dialog.component';
-
-
-
+import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenue/statistic-revenue.component';
+import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
+import { AgChartsAngularModule } from 'ag-charts-angular';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { ConfirmDeleteDialogComponent } from './Feature/Motobike/confirm-delete-
     HeaderComponent,
     FooterComponent,
     DashboardsComponent,
-    
+
     MotorbikeListComponent,
     BreadcrumbComponent,
     MotorbikeDetailComponent,
@@ -53,8 +53,22 @@ import { ConfirmDeleteDialogComponent } from './Feature/Motobike/confirm-delete-
     RegisterComponent,
     AddMotorbikeComponent,
     ConfirmDeleteDialogComponent,
+    StatisticRevenueComponent,
+    StatisticMotorbikeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,NgxPaginationModule,CommonModule, AngularEditorModule, BrowserAnimationsModule, ToastrModule.forRoot(), MatDialogModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule,
+    CommonModule,
+    AngularEditorModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MatDialogModule,
+    AgChartsAngularModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

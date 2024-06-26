@@ -13,6 +13,8 @@ import { HomePageListComponent } from './Feature/Home/home-page-list/home-page-l
 import { RegisterComponent } from './Feature/auth/register/register.component';
 import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
 import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/motorbike-detail.component';
+import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenue/statistic-revenue.component';
+import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
       { path: 'motorbike/add', component: AddMotorbikeComponent },
       { path: 'appointments', component: AppointmentsListComponent },
 
+      { path: 'statistic/revenue', component: StatisticRevenueComponent },
+      { path: 'statistic/motorbike', component: StatisticMotorbikeComponent },
 
     ],
     canActivate: [OwnerAuthGuard],

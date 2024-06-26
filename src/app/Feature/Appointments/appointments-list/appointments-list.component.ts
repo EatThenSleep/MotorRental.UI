@@ -23,6 +23,7 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   getAllAppointment() {
+
     this.appointmentService.getAppointmentsHttp().subscribe((res: any) => {
       if (res.isSuccess) {
         const result = res.result;
@@ -71,7 +72,9 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
   acceptAppointment(id: string): void {
     this.appointmentService.acceptAppointmentHttp(id).subscribe({
       next: () => {
+        this.appointments = []
         this.toastr.success('Accept successfully!');
+        this.getAllAppointment()
       },
       error: () => {
         this.toastr.error('Accept failed!');
@@ -82,7 +85,9 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
   rejectAppointment(id: string): void {
     this.appointmentService.rejectAppointmentHttp(id).subscribe({
       next: () => {
+        this.appointments = []
         this.toastr.success('Reject successfully!');
+        this.getAllAppointment()
       },
       error: () => {
         this.toastr.success('Reject failed!');
