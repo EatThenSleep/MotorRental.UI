@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../services/auth.service';
 import jwt_decode from 'jwt-decode';
 
-export const visitorGuard: CanActivateFn = (route, state) => {
+export const VisitorGuard: CanActivateFn = (route, state) => {
   const cookieService = inject(CookieService);
   const authService = inject(AuthService);
   const router = inject(Router);

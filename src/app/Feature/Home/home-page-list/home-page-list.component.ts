@@ -52,7 +52,7 @@ export class HomePageListComponent implements OnInit {
 
   onSearchInputChange(): void {
       this.searchAndFilterMotorbikes();
- 
+
   }
 
   viewDetail(motorbikeId: string): void {

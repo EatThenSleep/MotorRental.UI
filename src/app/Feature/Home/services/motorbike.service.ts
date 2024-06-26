@@ -17,7 +17,6 @@ export class MotorbikeService {
   }
 
   getDetailMotorbikeHttp(id: string): Observable<Motorbike> {
-    console.log(`${environment.apiBaseUrl}/Motorbikes/${id}`);
     return this.http.get<Motorbike>(`${environment.apiBaseUrl}/Motorbikes/${id}`);
   }
 

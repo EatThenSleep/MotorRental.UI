@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { MotorBikeRental } from '../models/motorbikerental.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MotorbikeService } from '../services/motorbike.service';
 import { Appointment } from '../models/appointment.model';
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-appointment-history',
   templateUrl: './appointment-history.component.html',
-  styleUrls: ['./appointment-history.component.css']
+  styleUrls: ['./appointment-history.component.css'],
 })
 export class AppointmentHistoryComponent {
   appointments: Appointment[] = [];
@@ -15,22 +16,23 @@ export class AppointmentHistoryComponent {
   itemsPerPage: number = 3;
   totalPages: number = 0;
 
-  constructor(private motorbikeService: MotorbikeService) {}
+  constructor(
+    private motorbikeService: MotorbikeService,
+    private paymentService: PaymentService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getAllAppointment();
-
   }
 
   getAllAppointment() {
     this.motorbikeService.getAppointmentsHttp().subscribe((res: any) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.result;
         for (let i = 0; i < result.length; i++) {
-          console.log(result[i]);
           const temp = new Appointment();
-          temp.Id = result[i].id; 
+          temp.Id = result[i].id;
           temp.Owner.id = result[i].owner.id;
           temp.Owner.name = result[i].owner.name;
           temp.Owner.phoneNumber = result[i].owner.phoneNumber;
@@ -44,19 +46,21 @@ export class AppointmentHistoryComponent {
           temp.StatusAppointment = result[i].statusAppointment;
           temp.StatusPayment = result[i].statusPayment;
           temp.RentalPrice = result[i].rentalPrice;
-  
+
           if (Array.isArray(result[i].surcharges)) {
             for (let j = 0; j < result[i].surcharges.length; j++) {
-              temp.Surcharge.push(result[i].surcharges[j]);  
+              temp.Surcharge.push(result[i].surcharges[j]);
             }
-          } 
-          temp.Total = temp.RentalPrice + temp.Surcharge.reduce((acc, curr) => acc + curr.amount, 0);
+          }
+          temp.Total =
+            temp.RentalPrice +
+            temp.Surcharge.reduce((acc, curr) => acc + curr.amount, 0);
           this.appointments.push(temp);
         }
       }
     });
   }
-  
+
   getAppointmentStatus(status: number) {
     if (status === 0) return 'Process';
     else if (status === 1) return 'Accepted';
@@ -69,6 +73,13 @@ export class AppointmentHistoryComponent {
   }
   makePayment(appoint: Appointment) {
     // Logic to handle payment
-    alert(`Processing payment for appointment ID: ${appoint.Id}`);
+    this.paymentService.payMentWithStripe(appoint.Id).subscribe({
+      next: (res: any) => {
+        if (res.isSuccess) {
+          console.log(res);
+          window.location.href = res.result;
+        }
+      },
+    });
   }
 }

@@ -25,8 +25,6 @@ import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/mo
 import { RegisterComponent } from './Feature/auth/register/register.component';
 
 import { MotorbikeRentalComponent } from './Feature/Home/motorbike-rental/motorbike-rental.component';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/appointment-history.component';
 
 import { AddMotorbikeComponent } from './Feature/Motobike/add-motorbike/add-motorbike.component';
@@ -37,6 +35,7 @@ import { ConfirmDeleteDialogComponent } from './Feature/Motobike/confirm-delete-
 import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenue/statistic-revenue.component';
 import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
 import { AgChartsAngularModule } from 'ag-charts-angular';
+import { ConfirmPaymentComponent } from './Feature/Home/confirm-payment/confirm-payment.component';
 
 @NgModule({
   declarations: [
@@ -59,12 +58,11 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
     RegisterComponent,
     MotorbikeRentalComponent,
     AppointmentHistoryComponent,
-  ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,NgxPaginationModule,CommonModule,BrowserAnimationsModule,ToastrModule.forRoot(),
-    AddMotorbikeComponent,
-    ConfirmDeleteDialogComponent,
     StatisticRevenueComponent,
     StatisticMotorbikeComponent,
+    ConfirmDeleteDialogComponent,
+    AddMotorbikeComponent,
+    ConfirmPaymentComponent,
   ],
   imports: [
     BrowserModule,

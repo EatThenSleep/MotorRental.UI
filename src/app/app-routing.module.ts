@@ -16,6 +16,8 @@ import { MotorbikeHomeDetailComponent } from './Feature/Home/motorbike-detail/mo
 import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenue/statistic-revenue.component';
 import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
 import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/appointment-history.component';
+import { VisitorGuard } from './Feature/auth/guard/visitor.guard';
+import { ConfirmPaymentComponent } from './Feature/Home/confirm-payment/confirm-payment.component';
 
 
 const routes: Routes = [
@@ -43,8 +45,9 @@ const routes: Routes = [
     { path: '', component: HomePageListComponent },
     { path: 'motorbike/:id', component: MotorbikeHomeDetailComponent },
 
-    { path: 'motorbike-rental/:id', component: MotorbikeRentalComponent },
-    { path: 'appointment-history', component: AppointmentHistoryComponent },
+    { path: 'motorbike-rental/:id', component: MotorbikeRentalComponent, canActivate: [VisitorGuard] },
+    { path: 'appointment-history', component: AppointmentHistoryComponent, canActivate: [VisitorGuard] },
+    { path: 'confirm-payment/:id', component: ConfirmPaymentComponent, canActivate: [VisitorGuard] },
 
     ]
   },
