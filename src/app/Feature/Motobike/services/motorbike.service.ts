@@ -1,10 +1,10 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Motorbike } from "../models/motorbike.model";
-import { Observable } from "rxjs";
+import { Observable, from, switchMap } from "rxjs";
 import { environment } from "src/environments/environment.development";
 import { AddMotorbike } from '../models/add-motorbike.model';
-import { EditMotorbike } from "../models/edit-motorbike.model";
+import { EditMotorBike } from "../models/edit-motorbike.model";
 
 @Injectable({
   providedIn: 'root',
@@ -45,22 +45,7 @@ export class MotorbikeService {
     return this.http.post<any>(`${environment.apiBaseUrl}/Motorbikes?addAuth=true`, formData);
   }
 
-  editMotorbikeHttp(motorbike: EditMotorbike): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('Id', motorbike.Id);
-    formData.append('Name', motorbike.Name);
-    formData.append('Type', motorbike.Type.toString());
-    formData.append('status', motorbike.status.toString());
-    formData.append('Description', motorbike.Description);
-    formData.append('PriceDay', motorbike.PriceDay ? motorbike.PriceDay.toString() : '');
-    formData.append('PriceWeek', motorbike.PriceWeek ? motorbike.PriceWeek.toString() : '');
-    formData.append('PriceMonth', motorbike.PriceMonth ? motorbike.PriceMonth.toString() : '');
-    formData.append('LicensePlate', motorbike.LicensePlate);
-    formData.append('Image', motorbike.Image);
-
-    return this.http.put<any>(`${environment.apiBaseUrl}/Motorbikes/${motorbike.Id}?addAuth=true`, formData);
-  }
-
+ 
   deleteMotorbikeHttp(motorbikeId: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiBaseUrl}/Motorbikes/${motorbikeId}?addAuth=true`);
   }
@@ -79,5 +64,35 @@ export class MotorbikeService {
     }
 
     return this.http.get<any>(`${environment.apiBaseUrl}/Motorbikes/GetALlMotorbikesOfOwner?addAuth=true`, { params });
+  }
+  updateMotorbikeHttp(id: string, motorbike: EditMotorBike): Observable<EditMotorBike> {
+    const formData = new FormData();
+    formData.append('Id', id);
+    formData.append('Name', motorbike.Name);
+    formData.append('status', `${motorbike.status}`);
+    formData.append('Description', motorbike.Description);
+    formData.append('PriceDay', `${motorbike.PriceDay}`);
+    formData.append('PriceWeek', `${motorbike.PriceWeek}`);
+    formData.append('PriceMonth', `${motorbike.PriceMonth}`);
+    formData.append('LicensePlate', motorbike.LicensePlate);
+  
+    if (motorbike.Image instanceof Blob) {
+      formData.append('Image', motorbike.Image, (motorbike.Image as File).name);
+      return this.sendUpdateRequest(id, formData);
+    } else if (typeof motorbike.Image === 'string') {
+      return from(fetch(motorbike.Image).then(res => res.blob()))
+        .pipe(switchMap(blob => {
+          formData.append('Image', blob, 'image.jpg'); 
+          return this.sendUpdateRequest(id, formData);
+        })
+      );
+    } else {
+      console.error("Invalid Image type");
+      return this.sendUpdateRequest(id, formData); 
+    }
+  }
+  private sendUpdateRequest(id: string, formData: FormData): Observable<EditMotorBike> {
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+    return this.http.put<EditMotorBike>(`${environment.apiBaseUrl}/MotorBikes/${id}?addAuth=true`, formData, { headers: headers });
   }
 }
