@@ -95,6 +95,34 @@ export class AppointmentsListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  returnWithoutPaymentAppointment(id: string): void {
+    const amount = 0; 
+    const reason = 'string'; 
+    this.appointmentService.returnWithoutPaymentHttp(id, amount, reason).subscribe({
+      next: () => {
+        this.toastr.success('Return successfully!');
+      },
+      error: (err) => {
+        this.toastr.error('Return failed!');
+        console.log(err);
+      },
+    });
+  }
+  
+
+  finishPaymentAppointment(id: string): void {
+    this.appointmentService.finishPaymentHttp(id).subscribe({
+      next: () => {
+        this.toastr.success('Payment successfully!');
+      },
+      error: (err) => {
+        this.toastr.error('Payment failed!');
+        console.log(err)
+      },
+    });
+  }
+  
+
   getCurrentDate(): string {
     const now = new Date();
     return `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
