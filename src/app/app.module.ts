@@ -38,7 +38,6 @@ import { ConfirmDeleteDialogComponent } from './Feature/Motobike/confirm-delete-
     HeaderComponent,
     FooterComponent,
     DashboardsComponent,
-    
     MotorbikeListComponent,
     BreadcrumbComponent,
     MotorbikeDetailComponent,

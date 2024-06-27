@@ -1,43 +1,103 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Motorbike } from '../models/motorbike.model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MotorbikeService } from '../services/motorbike.service';
+import { EditMotorBike } from '../models/edit-motorbike.model';
+import { Motorbike } from '../models/motorbike.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-motorbike-detail',
+  selector: 'app-detail-motorbike',
   templateUrl: './motorbike-detail.component.html',
-  styleUrls: ['./motorbike-detail.component.css'],
+  styleUrls: ['./motorbike-detail.component.css']
 })
 export class MotorbikeDetailComponent implements OnInit {
-  motorbike: Motorbike | null = null;
+  motor: Motorbike | null = null;
+  motorbike: EditMotorBike | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private motorbikeService: MotorbikeService
+    private motorbikeService: MotorbikeService,
+    private toastr : ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.getDetailMotorbike();
-  }
-
-  getDetailMotorbike(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.motorbikeService.getDetailMotorbikeHttp(id).subscribe((res: any) => {
-        this.motorbike = res.result;
-      });
+    const motorbikeId = this.route.snapshot.paramMap.get('id');
+    if (motorbikeId) {
+      this.loadMotorbike(motorbikeId);
     }
   }
 
-  getMotorbikeType(type: number) {
+  loadMotorbike(id: string): void {
+    this.motorbikeService.getDetailMotorbikeHttp(id).subscribe(
+      (data: any) => {
+        console.log('Motorbike data received:', data);
+        if (data.isSuccess && data.result) {
+          this.motor = data.result;
+          this.mapMotorToEditMotorbike();
+        } else {
+          console.error('Error: Unexpected response structure', data);
+        }
+      }
+    );
+  }
+
+  mapMotorToEditMotorbike(): void {
+    if (this.motor) {
+      this.motorbike = {
+        Name: this.motor.name,
+        status: this.motor.status,
+        Description: this.motor.description,
+        PriceDay: this.motor.priceDay,
+        PriceWeek: this.motor.priceWeek,
+        PriceMonth: this.motor.priceMonth,
+        LicensePlate: this.motor.licensePlate,
+        Image: this.motor.motorbikeAvatar,
+      };
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/webp'];
+      if (!validImageTypes.includes(file.type)) {
+        this.toastr.error('Định dạnh file không hợp lệ.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        if (this.motorbike) {
+          this.motorbike.Image = e.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  getMotorbikeType(type: number): string {
     if (type === 1) return 'Xe số';
     else if (type === 2) return 'Xe tay ga';
     return 'Xe tay côn';
   }
 
-  getMotorbikeStatus(status: number) {
+  getMotorbikeStatus(status: number): string {
     if (status === 1) return 'Enable';
     else if (status === 2) return 'Busy';
     return 'Maintain';
+  }
+
+  updateMotorbike(): void {
+    console.log("Bấm",this.motorbike)
+    const motorbikeId = this.route.snapshot.paramMap.get('id');
+    if (motorbikeId && this.motorbike) {
+      this.motorbikeService.updateMotorbikeHttp(motorbikeId, this.motorbike).subscribe(
+        response => {
+          this.toastr.success('Cập nhật thông tin xe thành công');
+        },
+        error => {
+          this.toastr.error('Lỗi . Không thể cập nhật xe');
+        }
+      );
+    }
   }
 }
