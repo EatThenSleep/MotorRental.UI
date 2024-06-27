@@ -34,8 +34,8 @@ export class HomePageListComponent implements OnInit {
 
   applyFilters(): void {
     this.filteredMotorbikes = this.motorbikes.filter(motorbike => {
-      const matchesType = !this.selectedType || motorbike.type.toString() === this.selectedType;
-      const matchesStatus = !this.selectedStatus || motorbike.status.toString() === this.selectedStatus;
+      const matchesType = !this.selectedType ? true : motorbike.type.toString() === this.selectedType;
+      const matchesStatus = !this.selectedStatus ? true : motorbike.status.toString() === this.selectedStatus;
       return matchesType && matchesStatus;
     });
   }
@@ -48,11 +48,6 @@ export class HomePageListComponent implements OnInit {
       this.motorbikes = res.result;
       this.applyFilters();
     });
-  }
-
-  onSearchInputChange(): void {
-      this.searchAndFilterMotorbikes();
-
   }
 
   viewDetail(motorbikeId: string): void {

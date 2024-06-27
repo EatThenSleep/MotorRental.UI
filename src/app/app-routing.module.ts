@@ -18,6 +18,7 @@ import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-moto
 import { AppointmentHistoryComponent } from './Feature/Home/appointment-history/appointment-history.component';
 import { VisitorGuard } from './Feature/auth/guard/visitor.guard';
 import { ConfirmPaymentComponent } from './Feature/Home/confirm-payment/confirm-payment.component';
+import { EditMotorbikeComponent } from './Feature/Motobike/edit-motorbike/edit-motorbike.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: 'motorbike', component: MotorbikeListComponent },
-      { path: 'motorbike/detail/:id', component: MotorbikeDetailComponent },
+      { path: 'motorbike/edit/:id', component: EditMotorbikeComponent },
       { path: 'motorbike/add', component: AddMotorbikeComponent },
       { path: 'appointments', component: AppointmentsListComponent },
 

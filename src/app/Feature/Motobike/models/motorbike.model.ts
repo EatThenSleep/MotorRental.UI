@@ -12,6 +12,6 @@ export interface Motorbike{
   priceDay: number
   priceWeek: number
   priceMonth: number
-  motorbikeAvatar: string
+  motorbikeAvatar: File
   licensePlate: string
 }

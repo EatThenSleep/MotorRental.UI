@@ -36,6 +36,7 @@ import { StatisticRevenueComponent } from './Feature/Statistics/statistic-revenu
 import { StatisticMotorbikeComponent } from './Feature/Statistics/statistic-motorbike/statistic-motorbike.component';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { ConfirmPaymentComponent } from './Feature/Home/confirm-payment/confirm-payment.component';
+import { EditMotorbikeComponent } from './Feature/Motobike/edit-motorbike/edit-motorbike.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ConfirmPaymentComponent } from './Feature/Home/confirm-payment/confirm-
     ConfirmDeleteDialogComponent,
     AddMotorbikeComponent,
     ConfirmPaymentComponent,
+    EditMotorbikeComponent,
   ],
   imports: [
     BrowserModule,
