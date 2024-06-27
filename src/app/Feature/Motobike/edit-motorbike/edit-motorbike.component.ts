@@ -92,11 +92,11 @@ export class EditMotorbikeComponent implements OnInit {
       this.motorbikeService.updateMotorbikeHttp(motorbikeId, this.motorbike).subscribe(
         response => {
           this.toastr.success('Cập nhật thông tin xe thành công');
-          console.log('Update response:', response);  // Log response
+          console.log('Update response:', response);
         },
         error => {
           this.toastr.error('Lỗi . Không thể cập nhật xe');
-          console.error('Update error:', error);  // Log error
+          console.error('Update error:', error);
         }
       );
     }
